@@ -1,4 +1,4 @@
-import { Bot, Context } from './deps.ts';
+import { Bot, Context, Keyboard } from './deps.ts';
 import { getRandomRestaurant, restaurants, stringifyRestaurants } from './restaurants.ts';
 import { setUserState } from './userState.ts';
 import { getChatId, getKeyboard, getUserId, reportMessage, RETURN_BTN_TEXT } from './utils.ts';
@@ -84,7 +84,9 @@ export function listCommand(ctx: Context) {
 export function addCommand(ctx: Context) {
   reportMessage('/add', ctx);
   const id = getUserId(ctx);
-  ctx.reply('Укажите название заведения');
+  ctx.reply('Укажите название заведения', {
+    reply_markup: new Keyboard().add(RETURN_BTN_TEXT),
+  });
   setUserState(id, 'adding');
 }
 
@@ -93,7 +95,7 @@ export function removeCommand(ctx: Context) {
   const id = getUserId(ctx);
 
   ctx.reply('Что будем исключать?', {
-    reply_markup: getKeyboard([...restaurants, RETURN_BTN_TEXT]),
+    reply_markup: getKeyboard(restaurants).add(RETURN_BTN_TEXT),
   });
   setUserState(id, 'removing');
 }

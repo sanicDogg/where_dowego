@@ -12,9 +12,8 @@ export const restaurants = [
 ];
 
 export const getRandomRestaurant = () => {
-  const arr = restaurants;
-  const randomIndex = Math.floor(Math.random() * arr.length);
-  return arr[randomIndex];
+  const randomIndex = Math.floor(Math.random() * restaurants.length);
+  return restaurants[randomIndex];
 };
 
 export const stringifyRestaurants = () => {

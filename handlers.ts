@@ -34,6 +34,7 @@ function handleRemoving(ctx: Context) {
 
 function handleAdding(ctx: Context) {
   const id = getUserId(ctx);
+  if (checkIfReturn(ctx)) return;
 
   const rest = String(ctx.message?.text);
   addRestaurant(rest);
